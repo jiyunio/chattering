@@ -2,8 +2,14 @@
 
 #### Dweb ❌ Incheon National University (INU)
 
-## 🌟 Base code for the term project in Web class
+## 🌟 Let's Start Chattering ! <img src="https://img.shields.io/badge/React-61DAFB? style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-6DB33F? style=flat&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1? style=flat&logo=mysql&logoColor=white"/> <img src="https://img.shields.io/badge/Socket.io-010101? style=flat&logo=socketdotio&logoColor=white"/>
 
-⚠️ Copyright © 2024. _Dweb_ All Rights Reserved.
+### Developer
+- 고지윤
 
-<p align="right"><img src = "./images/Dweb.png" width=40%></p>
+### 웹 기능 소개
+실시간으로 소통할 수 있게 구현한 Chatting App
+
+회원가입 & 로그인으로 접속 가능하다.
+
+원하는 채팅방을 생성 & 검색할 수 있다.
