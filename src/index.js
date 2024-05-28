@@ -1,13 +1,15 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import reportWebVitals from "./reportWebVitals.js";
-import ChatApp from "./client/app.jsx";
+import Router from "./Router.js";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ChatApp />
-  </React.StrictMode>
+  <BrowserRouter>
+    <React.StrictMode>
+      <Router />
+    </React.StrictMode>
+  </BrowserRouter>
 );
-
 reportWebVitals();
