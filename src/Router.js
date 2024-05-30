@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ChatApp from "./client/app";
 import SignUp from "./client/SignUp";
-import Main from "./client/Main";
+import Welcome from "./client/WelcomePage";
 import SignIn from "./client/SignIn";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<ChatApp />}></Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/sign-in" element={<SignIn />}></Route>
-        <Route path="/main" element={<Main />}></Route>
+        <Route path="/welcome" element={<Welcome />}></Route>
       </Routes>
     </div>
   );
