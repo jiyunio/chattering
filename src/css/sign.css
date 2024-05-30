@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * {
+    font-family: "Gowun Batang", serif;
+    background-color: #f5fafb;
+  }
+  
+  .page {
+    position: relative;
+    text-align: center;
+    top: 100px;
+  }
+  
+  h1 {
+    padding: 20px;
+  }
+  
+  input {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 20px;
+    border-width: 0 0 1px;
+    outline: none;
+  }
+  
+  .cancelButton {
+    width: 70px;
+    height: 30px;
+    background-color: #cde0ef;
+    border: 0;
+    border-radius: 20px;
+    padding: 5 20px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  .okButton {
+    width: 70px;
+    height: 30px;
+    background-color: #98c5e7;
+    border: 0;
+    border-radius: 20px;
+    padding: 5 20px;
+    margin: 10px;
+    cursor: pointer;
+  }
+   */

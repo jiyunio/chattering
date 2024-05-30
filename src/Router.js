@@ -1,14 +1,18 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Main from "./client/Main";
 import ChatApp from "./client/app";
+import SignUp from "./client/SignUp";
+import Main from "./client/Main";
+import SignIn from "./client/SignIn";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/main" element={<Main />}></Route>
         <Route path="/" element={<ChatApp />}></Route>
+        <Route path="/sign-up" element={<SignUp />}></Route>
+        <Route path="/sign-in" element={<SignIn />}></Route>
+        <Route path="/main" element={<Main />}></Route>
       </Routes>
     </div>
   );
