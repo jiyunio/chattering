@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "@mui/material/Button";
@@ -12,6 +13,15 @@ const navigation = [
 
 const WelcomePage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const change = useNavigate();
+
+  const changePage = (bool) => {
+    if (bool === true) {
+      change("/sign-in");
+    } else {
+      change("/welcome");
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -69,14 +79,6 @@ const WelcomePage = () => {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
-                </div>
               </div>
             </div>
           </DialogPanel>
@@ -105,13 +107,17 @@ const WelcomePage = () => {
               지금 바로 "Chattering" 에서 친구들과 즐거운 채팅을 시작하세요!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button sx={{ color: "#0A4A9B" }} variant="outlined">
+              <Button
+                sx={{ color: "#0A4A9B" }}
+                variant="outlined"
+                onClick={() => changePage(true)}
+              >
                 Sign In
               </Button>
             </div>
-            <div>
+            <div className="mt-3">
               <a
-                href="#"
+                href="/sign-up"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 처음 이용하시나요? 회원가입하세요!{" "}

@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const change = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const changePage = (bool) => {
+    if (bool === true) {
+      change("/chatting");
+    } else {
+      change("/welcome");
+    }
   };
 
   return (
@@ -26,7 +36,7 @@ const SignIn = () => {
       </div>
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-customBlue sm:text-4xl">
-        🌳 Join to Chattering 🌳
+          🌳 Join to Chattering 🌳
         </h2>
       </div>
       <form
@@ -84,14 +94,16 @@ const SignIn = () => {
               <Button
                 sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
                 variant="outlined"
+                onClick={() => changePage(false)}
               >
                 Cancle
               </Button>
               <Button
                 sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
                 variant="outlined"
+                onClick={() => changePage(true)}
               >
-                SignIn
+                Sign In
               </Button>
             </Stack>
           </div>

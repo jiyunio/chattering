@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const change = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const changePage = (bool) => {
+    if (bool === true) {
+      change("/sign-in");
+    } else {
+      change("/welcome");
+    }
   };
 
   return (
@@ -126,14 +136,16 @@ const SignUp = () => {
               <Button
                 sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
                 variant="outlined"
+                onClick={() => changePage(false)}
               >
                 Cancle
               </Button>
               <Button
                 sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
                 variant="outlined"
+                onClick={() => changePage(true)}
               >
-                SignUp
+                Sign Up
               </Button>
             </Stack>
           </div>
