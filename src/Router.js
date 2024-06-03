@@ -1,20 +1,23 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import ChatApp from "./client/app";
+// import Join from "./client/Chat/Join";
+// import Chat from "./client/Chat/Chatting";
 import SignUp from "./client/SignUp";
 import Welcome from "./client/WelcomePage";
 import SignIn from "./client/SignIn";
-import Chatting from "./client/Chat/Chatting";
+import Chat from "./client/Chat/Chat";
+import ChatMain from "./client/Chat/ChatMain";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ChatApp />}></Route>
+        <Route path="/chat" element={<Chat />}></Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/sign-in" element={<SignIn />}></Route>
-        <Route path="/welcome" element={<Welcome />}></Route>
-        <Route path="/chatting" element={<Chatting />}></Route>
+        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/chat-main" element={<ChatMain />}></Route>
+        {/* <Route path="/chatting" element={<Chatting />}></Route> */}
       </Routes>
     </div>
   );

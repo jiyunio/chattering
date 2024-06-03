@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
+const { getUser } = require("../indexedDB/User");
+
 const SignIn = () => {
+  const [name, setName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const change = useNavigate();
 
@@ -14,9 +17,22 @@ const SignIn = () => {
 
   const changePage = (bool) => {
     if (bool === true) {
-      change("/chatting");
+      const userId = document.getElementById("id").value;
+      const userPw = document.getElementById("password").value;
+      const user = getUser(userId).then((user) => {
+        if (user) {
+          console.log("User found:", user);
+          if (user.userPw !== userPw) {
+            alert("비밀번호를 다시 확인해주세요.");
+            change(`/sign-in`);
+          }
+        } else {
+          alert("회원을 찾지 못했습니다. 회원가입을 해주세요.");
+          change("/sign-up");
+        }
+      });
     } else {
-      change("/welcome");
+      change("/");
     }
   };
 
@@ -50,15 +66,17 @@ const SignIn = () => {
               htmlFor="company"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              🌱 아이디
+              🌱
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
-                name="company"
-                id="company"
+                name="id"
+                id="id"
                 autoComplete="organization"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-3.5 py-6  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6"
+                placeholder="Your ID"
+                onChange={(event) => setName(event.target.value)}
               />
             </div>
           </div>
@@ -67,7 +85,7 @@ const SignIn = () => {
               htmlFor="password"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              🌱 비밀번호
+              🌱
             </label>
             <div className="relative mt-2.5">
               <input
@@ -75,7 +93,8 @@ const SignIn = () => {
                 name="password"
                 id="password"
                 autoComplete="current-password"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-3.5 py-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-xl sm:leading-6"
+                placeholder="Your PassWord"
               />
               <button
                 type="button"
@@ -91,20 +110,25 @@ const SignIn = () => {
           <div style={{ display: "flex", justifyContent: "center" }}>
             {" "}
             <Stack spacing={2} direction="row">
-              <Button
-                sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
-                variant="outlined"
-                onClick={() => changePage(false)}
-              >
-                Cancle
-              </Button>
-              <Button
-                sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
-                variant="outlined"
+              <Link onClick={() => changePage(false)} to={`/`}>
+                <Button
+                  sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
+                  variant="outlined"
+                >
+                  Cancle
+                </Button>
+              </Link>
+              <Link
                 onClick={() => changePage(true)}
+                to={`/chat-main?name=${name}`}
               >
-                Sign In
-              </Button>
+                <Button
+                  sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
+                  variant="outlined"
+                >
+                  Sign In
+                </Button>
+              </Link>
             </Stack>
           </div>
         </div>
