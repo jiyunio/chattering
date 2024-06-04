@@ -121,14 +121,14 @@ const Search = () => {
       <div>
         <div className="open-box">
           <div className="room-name">{roomName}</div>
-
+          <div style={{ textAlign: "center" }}>검색한 채팅방이 존재합니다!</div>
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
-            <div className="next-button" variant="outlined">
+            <button className="next-button" variant="outlined">
               Cancle
-            </div>
+            </button>
           </Link>
           <Link
             onClick={(e) => {
@@ -136,13 +136,13 @@ const Search = () => {
             }}
             to={`/chat?name=${name}&room=${roomName}`}
           >
-            <Button
+            <button
               className="next-button"
               variant="outlined"
               onClick={handleJoin}
             >
               Join
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
@@ -151,14 +151,16 @@ const Search = () => {
       <div>
         <div className="open-box">
           <h1 className="room-name">{roomName}</h1>
-
+          <div style={{ textAlign: "center" }}>
+            검색한 채팅방이 존재하지 않습니다!
+          </div>
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
-            <Button className="next-button" variant="outlined">
+            <button className="next-button" variant="outlined">
               Cancle
-            </Button>
+            </button>
           </Link>
           <Link
             onClick={(e) => {
@@ -166,13 +168,13 @@ const Search = () => {
             }}
             to={`/chat?name=${name}&room=${roomName}`}
           >
-            <Button
+            <button
               className="next-button"
               variant="outlined"
               onClick={handleMake}
             >
               Make
-            </Button>
+            </button>
           </Link>
         </div>
       </div>
@@ -182,7 +184,7 @@ const Search = () => {
   return (
     <div className="room-container">
       <div className="search-screen">
-        <p>Chatting Room</p>
+        <p style={{ fontWeight: "bold" }}>Chatting Room</p>
         <div>
           <input className="search-input" ref={roomNameRef} />
           <Button
@@ -203,7 +205,7 @@ const Search = () => {
           ></Button>
         </div>
         <div className="room-list">
-          <div>참여방</div>
+          <div style={{ fontWeight: "bold" }}>참여방</div>
           <JoinRoom name={name} />
         </div>
       </div>

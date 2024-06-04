@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-// import Join from "./client/Chat/Join";
-// import Chat from "./client/Chat/Chatting";
+import "../src/css/main.css";
 import SignUp from "./client/SignUp";
 import Welcome from "./client/WelcomePage";
 import SignIn from "./client/SignIn";

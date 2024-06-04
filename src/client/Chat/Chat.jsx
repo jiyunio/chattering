@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
-import ScrollToBottom from "react-scroll-to-bottom";
 import TextContainer from "./Component/TextContainer";
 import InfoBar from "./Component/InfoBar";
 import Messages from "./Component/Messages";
@@ -11,13 +9,8 @@ import "../../css/Chat.css";
 
 import "../../css/Chat.css";
 
-const {
-  addUser,
-  getUser,
-  getUserRoom,
-  putUserRoom,
-} = require("../../indexedDB/User");
 const { addChat, getChat } = require("../../indexedDB/Chat");
+const VERSION = 2;
 
 const ENDPOINT = "http://localhost:5000";
 const socket = io(ENDPOINT);
@@ -47,22 +40,41 @@ const Chat = () => {
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
-    const name = query.get("name");
     const room = query.get("room");
 
-    // room이 변경될 때만 이전 대화 기록을 가져옴
-    getChat(room)
-      .then((chats) => {
-        const data = chats.map((chat) => ({
-          user: chat.userId,
-          text: chat.content,
-          time: chat.created,
-        }));
-        setMessages(data);
-      })
-      .catch((error) => {
-        console.log("가져오기 실패", error);
-      });
+    const checkObjectStore = async (room) => {
+      const dbRequest = indexedDB.open("chatDataBase", VERSION);
+
+      dbRequest.onsuccess = (event) => {
+        const db = event.target.result;
+
+        if (db.objectStoreNames.contains(room)) {
+          //chat 데이터베이스에 채팅 내역이 있으면 불러오기
+          getChat(room)
+            .then((chats) => {
+              const data = chats.map((chat) => ({
+                user: chat.userId,
+                text: chat.content,
+                time: chat.created,
+              }));
+              setMessages(data);
+            })
+            .catch((error) => {
+              console.log("가져오기 실패", error);
+            });
+        } else {
+          console.log(`Object store ${room} not found`);
+        }
+      };
+
+      dbRequest.onerror = (event) => {
+        console.log("Database error: ", event.target.errorCode);
+      };
+    };
+
+    if (room) {
+      checkObjectStore(room);
+    }
   }, [room]); // 의존성 배열에 room 추가
 
   useEffect(() => {
@@ -81,7 +93,6 @@ const Chat = () => {
 
     const data = {
       userId: name,
-      socketId: socket.id,
       content: message,
       created: new Date(),
     };
@@ -95,7 +106,7 @@ const Chat = () => {
   return (
     <div className="outerContainer">
       <div className="container">
-        <InfoBar name={name} room={ room} />
+        <InfoBar name={name} room={room} />
         <Messages messages={messages} name={name} />
         <Input
           message={message}

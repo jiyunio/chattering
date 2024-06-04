@@ -137,7 +137,6 @@ body {
   margin-top: calc((100vh - var(--side-bar-height)) / 2);
   padding: 20px;
   margin-left: 10%;
-
   background-color: #e2e2e2; /* 배경색 설정 */
   border-radius: 15px; /* 모서리 둥글게 설정 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
