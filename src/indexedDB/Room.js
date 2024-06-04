@@ -1,4 +1,4 @@
-const VERSION = 17;
+const VERSION = 20;
 
 const addRoom = (roomName, userName) => {
   let db;

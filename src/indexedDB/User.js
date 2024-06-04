@@ -1,4 +1,4 @@
-const VERSION = 17;
+const VERSION = 20;
 
 const addUser = (data) => {
   //회원가입

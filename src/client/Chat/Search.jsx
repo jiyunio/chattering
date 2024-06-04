@@ -36,7 +36,7 @@ const JoinRoom = ({ name }) => {
   return (
     <div id="search-room">
       {rooms.map((room, index) => (
-        <div className="room-box" key={index}>
+        <div className="open-box" key={index}>
           <Link
             onClick={(e) => {
               !name || !room ? e.preventDefault() : null;
@@ -120,13 +120,14 @@ const Search = () => {
     return changePage ? ( // 존재하는 채팅방
       <div>
         <div className="open-box">
-          <div>{roomName}</div>
+          <h1>{roomName}</h1>
 
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
             <Button
+              className="search-room"
               sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
               variant="outlined"
             >
@@ -140,6 +141,7 @@ const Search = () => {
             to={`/chat?name=${name}&room=${roomName}`}
           >
             <Button
+              className="search-room"
               sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
               variant="outlined"
               onClick={handleJoin}
@@ -153,13 +155,14 @@ const Search = () => {
       // 존재하지 않는 채팅방
       <div>
         <div className="open-box">
-          <div>{roomName}</div>
+          <h1>{roomName}</h1>
 
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
             <Button
+              className="search-room"
               sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
               variant="outlined"
             >
@@ -173,6 +176,7 @@ const Search = () => {
             to={`/chat?name=${name}&room=${roomName}`}
           >
             <Button
+              className="search-room"
               sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
               variant="outlined"
               onClick={handleMake}

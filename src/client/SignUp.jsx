@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { VisibilityOff, Visibility, DataArray } from "@mui/icons-material";
 
 const {
   addUser,
@@ -13,10 +13,15 @@ const {
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
   const change = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibility1 = () => {
+    setShowPassword1(!showPassword1);
   };
 
   const changePage = (bool) => {
@@ -29,14 +34,21 @@ const SignUp = () => {
     if (bool === true) {
       getUser(data.userId)
         .then((user) => {
-          // 회원 존재하는 경우
-          alert("이미 존재하는 회원입니다.");
-          change("/sign-up");
+          if (user.userId === data.userId) {
+            // 회원 존재하는 경우
+            alert("이미 존재하는 회원입니다.");
+            change("/sign-up");
+          }
         })
         .catch((error) => {
           // 회원 존재하지 않는 경우
-          addUser(data);
-          change("/sign-in");
+          if (data.userPw !== data.checkPw) {
+            alert("비밀번호를 다시 입력해주세요.");
+            change("/sign-up");
+          } else {
+            addUser(data);
+            change("/sign-in");
+          }
         });
     } else {
       change("/");
@@ -121,7 +133,7 @@ const SignUp = () => {
             </label>
             <div className="relative mt-2.5">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword1 ? "text" : "password"}
                 name="checkPw"
                 id="checkPw"
                 autoComplete="current-password"
@@ -130,10 +142,10 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                onClick={togglePasswordVisibility}
+                onClick={togglePasswordVisibility1}
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword1 ? <VisibilityOff /> : <Visibility />}
               </button>
             </div>
           </div>
