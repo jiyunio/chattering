@@ -1,8 +1,8 @@
-const VERSION = 2;
+const VERSION = 27;
 
 const addChat = (roomName, data) => {
   let db;
-  const req = indexedDB.open("chatDataBase", VERSION);
+  const req = indexedDB.open("ChatDataBase", VERSION);
 
   req.onupgradeneeded = function (e) {
     console.log(`🤯 Upgrade!`);
@@ -41,7 +41,7 @@ const addChat = (roomName, data) => {
 const getChat = (roomName) => {
   const room = roomName;
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open("chatDataBase", VERSION);
+    const req = indexedDB.open("ChatDataBase", VERSION);
 
     req.onsuccess = function (e) {
       console.log(`🔥 Onsuccess`);

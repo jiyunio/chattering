@@ -10,7 +10,7 @@ import "../../css/Chat.css";
 import "../../css/Chat.css";
 
 const { addChat, getChat } = require("../../indexedDB/Chat");
-const VERSION = 2;
+const VERSION = 27;
 
 const ENDPOINT = "http://localhost:5000";
 const socket = io(ENDPOINT);
@@ -43,7 +43,7 @@ const Chat = () => {
     const room = query.get("room");
 
     const checkObjectStore = async (room) => {
-      const dbRequest = indexedDB.open("chatDataBase", VERSION);
+      const dbRequest = indexedDB.open("ChatDataBase", VERSION);
 
       dbRequest.onsuccess = (event) => {
         const db = event.target.result;
