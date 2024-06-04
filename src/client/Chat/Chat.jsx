@@ -114,7 +114,7 @@ const Chat = () => {
           sendMessage={sendMessage}
         />
       </div>
-      <TextContainer users={users} />
+      <TextContainer room={room} />
     </div>
   );
 };
