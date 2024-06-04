@@ -43,19 +43,31 @@ const Chat = () => {
         alert(error);
       }
     });
-  }, [ENDPOINT, window.location.search]);
+  }, [ENDPOINT, window.location.search, room]);
 
   useEffect(() => {
-    getUser(room)
-      .then((users) => {
-        // 가져온 사용자 정보를 상태에 설정하거나 다른 처리를 할 수 있습니다.
-        console.log("Room users:", users);
-        setUsers(users); // 예시: 사용자 정보를 상태에 저장
+    const query = new URLSearchParams(window.location.search);
+    const name = query.get("name");
+    const room = query.get("room");
+
+    // socket 연결, 이벤트 리스너 추가 등의 로직...
+
+    // room이 변경될 때만 이전 대화 기록을 가져옴
+    getChat(room)
+      .then((chats) => {
+        const data = chats.map((chat) => ({
+          user: chat.userId,
+          text: chat.content,
+          time: chat.created,
+        }));
+        setMessages(data);
       })
       .catch((error) => {
-        console.log("Error fetching users:", error);
+        console.log("Error fetching chat history:", error);
       });
+  }, [room]); // 의존성 배열에 room 추가
 
+  useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });

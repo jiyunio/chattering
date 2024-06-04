@@ -23,11 +23,11 @@ io.on("connection", async (socket) => {
 
     socket.join(user.room);
 
-    //socket.emit : 서버에서 이벤트 발생시킴 => 클라이언트 페이지 이벤트 리스너가 처리 (클라이언트에게 메시지 전송)
-    socket.emit("message", {
-      user: "admin",
-      text: `${user.name}, ${user.room} 환영합니다.`,
-    });
+    // socket.emit : 서버에서 이벤트 발생시킴 => 클라이언트 페이지 이벤트 리스너가 처리 (클라이언트에게 메시지 전송)
+    // socket.emit("message", {
+    //   user: "admin",
+    //   text: `${user.name}님, ${user.room} 에 오신 것을 환영합니다.`,
+    // });
 
     // socket.broadcast.to(user.room).emit("message", {
     //   user: "admin",
@@ -43,6 +43,7 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("sendMessage", ({ room, data }, callback) => {
+    console.log("dddd", data);
     const _data = data;
     const user = _data.userId;
 
@@ -52,7 +53,7 @@ io.on("connection", async (socket) => {
     console.log("Sending message from user:", user);
     console.log("User room:", room);
 
-    // if (user && user.room) {
+    // if (user && user .room) {
     //   io.to(user.room).emit("message", { user: user.name, text: message });
     // } else {
     //   console.error("User or user.room is not defined");

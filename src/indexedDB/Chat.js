@@ -1,4 +1,4 @@
-const VERSION = 15;
+const VERSION = 17;
 
 const addChat = (roomName, data) => {
   console.log(data.socketId);
@@ -80,4 +80,4 @@ const getChat = (roomName) => {
   });
 };
 
-module.exports = { addChat,  getChat };
+module.exports = { addChat, getChat };
