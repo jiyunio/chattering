@@ -57,3 +57,30 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
   display: inline-block; /* 옆으로 나란히 배치 */
 }
+
+.room-list {
+  margin-top: 60px;
+}
+
+.room-name {
+  font-size: xx-large;
+  align-items: center;
+}
+
+.next-button{
+  border-color: #0a4a9b;
+  color: #0a4a9b;
+  width: 100px;
+  background-color: #ffff;
+  padding: 10px;
+  margin-top: 5%;
+  height: 5%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; /* 텍스트가 줄바꿈 되지 않도록 설정 */
+  overflow: hidden; /* 컨테이너를 벗어나는 텍스트 숨김 처리 */
+  text-overflow: ellipsis; /* 텍스트가 오버플로우될 때 말줄임표로 표시 */
+  font-size: 20px; /* 텍스트 사이즈 조정 */
+  display: flex; /* 자식 요소들을 가로로 배치 */
+  align-items: center; /* 자식 요소들을 수직 가운데 정렬 */
+}

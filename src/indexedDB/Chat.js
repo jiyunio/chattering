@@ -1,7 +1,6 @@
 const VERSION = 20;
 
 const addChat = (roomName, data) => {
-  console.log(data.socketId);
   //채팅방에 채팅 작성할 때
   let db;
   const req = indexedDB.open("chatDataBase", VERSION);
@@ -10,7 +9,7 @@ const addChat = (roomName, data) => {
     console.log(`🤯 Upgrade!`);
     db = e.target.result;
     db.createObjectStore(roomName, {
-      keyPath: data.socketId,
+      keyPath: "id",
       autoIncrement: true,
     });
   };

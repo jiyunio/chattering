@@ -36,7 +36,7 @@ const JoinRoom = ({ name }) => {
   return (
     <div id="search-room">
       {rooms.map((room, index) => (
-        <div className="open-box" key={index}>
+        <div className="search-input" key={index}>
           <Link
             onClick={(e) => {
               !name || !room ? e.preventDefault() : null;
@@ -120,19 +120,15 @@ const Search = () => {
     return changePage ? ( // 존재하는 채팅방
       <div>
         <div className="open-box">
-          <h1>{roomName}</h1>
+          <div className="room-name">{roomName}</div>
 
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
-            <Button
-              className="search-room"
-              sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
-              variant="outlined"
-            >
+            <div className="next-button" variant="outlined">
               Cancle
-            </Button>
+            </div>
           </Link>
           <Link
             onClick={(e) => {
@@ -141,8 +137,7 @@ const Search = () => {
             to={`/chat?name=${name}&room=${roomName}`}
           >
             <Button
-              className="search-room"
-              sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
+              className="next-button"
               variant="outlined"
               onClick={handleJoin}
             >
@@ -155,17 +150,13 @@ const Search = () => {
       // 존재하지 않는 채팅방
       <div>
         <div className="open-box">
-          <h1>{roomName}</h1>
+          <h1 className="room-name">{roomName}</h1>
 
           <Link
             onClick={(e) => (!name ? e.preventDefault() : null)}
             to={`/chat-main?name=${name}`}
           >
-            <Button
-              className="search-room"
-              sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
-              variant="outlined"
-            >
+            <Button className="next-button" variant="outlined">
               Cancle
             </Button>
           </Link>
@@ -176,8 +167,7 @@ const Search = () => {
             to={`/chat?name=${name}&room=${roomName}`}
           >
             <Button
-              className="search-room"
-              sx={{ borderColor: "#0A4A9B", color: "#0A4A9B" }}
+              className="next-button"
               variant="outlined"
               onClick={handleMake}
             >
@@ -212,8 +202,10 @@ const Search = () => {
             onClick={handleClick}
           ></Button>
         </div>
-        <div>참여방</div>
-        <JoinRoom name={name} />
+        <div className="room-list">
+          <div>참여방</div>
+          <JoinRoom name={name} />
+        </div>
       </div>
       <div className="click-screen">
         {showMakeRoom !== "" && <MakeRoom roomName={roomName} />}
