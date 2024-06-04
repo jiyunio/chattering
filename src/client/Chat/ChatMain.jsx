@@ -29,12 +29,6 @@ const ChatMain = () => {
               Serch
             </a>
           </li>
-          <li>
-            <a href="#">menu3</a>
-          </li>
-          <li>
-            <a href="#">menu4</a>
-          </li>
         </ul>
       </aside>
       {showSearchWindow === "search" && <Search />}

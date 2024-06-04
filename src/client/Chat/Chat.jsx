@@ -50,8 +50,6 @@ const Chat = () => {
     const name = query.get("name");
     const room = query.get("room");
 
-    // socket 연결, 이벤트 리스너 추가 등의 로직...
-
     // room이 변경될 때만 이전 대화 기록을 가져옴
     getChat(room)
       .then((chats) => {
@@ -63,7 +61,7 @@ const Chat = () => {
         setMessages(data);
       })
       .catch((error) => {
-        console.log("Error fetching chat history:", error);
+        console.log("가져오기 실패", error);
       });
   }, [room]); // 의존성 배열에 room 추가
 
@@ -97,7 +95,7 @@ const Chat = () => {
   return (
     <div className="outerContainer">
       <div className="container">
-        <InfoBar room={room} />
+        <InfoBar name={name} room={ room} />
         <Messages messages={messages} name={name} />
         <Input
           message={message}

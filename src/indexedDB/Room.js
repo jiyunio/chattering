@@ -39,7 +39,7 @@ const getRoom = (room) => {
       console.log(`🔥 Onsuccess`);
       const db = e.target.result;
       try {
-        const transaction = db.transaction("Room", "readonly");
+        const transaction = db.transaction("Room");
         const store = transaction.objectStore("Room");
         const cursorRequest = store.openCursor();
 
@@ -99,7 +99,7 @@ const addUserRoom = (roomName, userName) => {
               const updateData = cursor.value;
               // room 배열에 roomName 추가
               if (!updateData.users.includes(userName)) {
-                updateData.room.push(userName);
+                updateData.users.push(userName);
                 // 데이터 업데이트
                 const requestUpdate = cursor.update(updateData);
                 requestUpdate.onsuccess = function () {

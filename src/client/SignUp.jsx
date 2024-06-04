@@ -4,7 +4,12 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
-const { addUser } = require("../indexedDB/User");
+const {
+  addUser,
+  getUser,
+  getUserRoom,
+  putUserRoom,
+} = require("../indexedDB/User");
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,8 +27,17 @@ const SignUp = () => {
     };
 
     if (bool === true) {
-      addUser(data);
-      change("/sign-in");
+      getUser(data.userId)
+        .then((user) => {
+          // 회원 존재하는 경우
+          alert("이미 존재하는 회원입니다.");
+          change("/sign-up");
+        })
+        .catch((error) => {
+          // 회원 존재하지 않는 경우
+          addUser(data);
+          change("/sign-in");
+        });
     } else {
       change("/");
     }
@@ -103,7 +117,7 @@ const SignUp = () => {
               htmlFor="password"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              💫 비밀번호 확인
+              💫
             </label>
             <div className="relative mt-2.5">
               <input

@@ -9,20 +9,15 @@ const addChat = (roomName, data) => {
   req.onupgradeneeded = function (e) {
     console.log(`🤯 Upgrade!`);
     db = e.target.result;
-    if (!db.objectStoreNames.contains(roomName)) {
-      db.createObjectStore(roomName, {
-        keyPath: data.socketId,
-        autoIncrement: true,
-      });
-    }
+    db.createObjectStore(roomName, {
+      keyPath: data.socketId,
+      autoIncrement: true,
+    });
   };
 
   req.onsuccess = function (e) {
     console.log(`🔥 Onsuccess`);
     db = e.target.result;
-    if (!db.objectStoreNames.contains(roomName)) {
-      db.createObjectStore(roomName, { keyPath: "id", autoIncrement: true });
-    }
     console.log(`🔥`, db);
     const chat = {
       userId: data.userId,
@@ -51,7 +46,7 @@ const getChat = (roomName) => {
       console.log(`🔥 Onsuccess`);
       const db = e.target.result;
 
-      const transaction = db.transaction(roomName, "readonly");
+      const transaction = db.transaction(roomName);
       const store = transaction.objectStore(roomName);
       const cursorRequest = store.openCursor();
       const chatMessages = [];

@@ -80,8 +80,8 @@ const getUser = (userId) => {
   });
 };
 
-const getUserRoom = (userId, roomName) => {
-  //사용자가 참여 중인 채팅방인지 확인
+const getUserRoom = (userId) => {
+  //사용자가 참여 중인 채팅방 전체 조회
   return new Promise((resolve, reject) => {
     const req = indexedDB.open("userDataBase", VERSION);
 
@@ -97,10 +97,7 @@ const getUserRoom = (userId, roomName) => {
         const cursor = e.target.result;
         if (cursor) {
           if (cursor.value.userId === userId) {
-            const hasRoom = cursor.value.room.includes(roomName);
-            resolve(hasRoom); // 조건에 맞는 사용자를 찾았을 때
-          } else {
-            cursor.continue(); // 다음 객체로 이동
+            resolve(cursor.value.room); // 조건에 맞는 사용자를 찾았을 때
           }
         } else {
           resolve(false); // 사용자를 찾지 못했거나 roomName이 없는 경우
